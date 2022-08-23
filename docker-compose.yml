@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  mysql:
+    container_name: my-base
+    image: mysql:8
+    ports:
+      - 3306:3306
+    volumes:
+      - ~/apps/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=0510
+      - MYSQL_PASSWORD=0510
+      - MYSQL_USER=admin
+      - MYSQL_DATABASE=ordem_servico

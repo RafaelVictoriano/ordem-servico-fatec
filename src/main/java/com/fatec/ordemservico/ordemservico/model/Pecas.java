@@ -1,11 +1,14 @@
 package com.fatec.ordemservico.ordemservico.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.math.BigDecimal;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.List;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "pecas")
 public class Pecas {
@@ -18,4 +21,7 @@ public class Pecas {
     private String quantidade;
     private BigDecimal valor;
     private String fornecedor;
+
+    @ManyToMany(mappedBy = "pecas")
+    private List<OrdemServico> ordermServicos;
 }
