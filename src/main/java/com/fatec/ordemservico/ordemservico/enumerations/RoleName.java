@@ -1,5 +1,8 @@
 package com.fatec.ordemservico.ordemservico.enumerations;
 
+import lombok.ToString;
+
+@ToString
 public enum RoleName {
 
     ROLES_GERENTE,

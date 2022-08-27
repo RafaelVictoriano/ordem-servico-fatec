@@ -1,27 +1,29 @@
 package com.fatec.ordemservico.ordemservico.dto;
 
 import com.sun.istack.NotNull;
-import lombok.Data;
-import lombok.NonNull;
+import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-@Data
+@Getter
+@AllArgsConstructor @NoArgsConstructor
 public class ClienteDto implements Serializable {
 
-    @NotNull @CPF
-    private final String cpf;
     @NotNull
-    private final LocalDate dataNascimento;
+    @CPF
+    private String cpf;
     @NotNull
-    private final String preferenciaPagamento;
+    private LocalDate dataNascimento;
     @NotNull
-    private final String cep;
+    private String preferenciaPagamento;
     @NotNull
-    private final String telefone;
-    @NotNull @Email
-    private final String email;
+    private String cep;
+    @NotNull
+    private String telefone;
+    @NotNull
+    @Email
+    private String email;
 }

@@ -12,6 +12,10 @@ import javax.persistence.*;
 @Setter
 public class Role implements GrantedAuthority {
 
+    public static final String ROLES_GERENTE = "ROLES_GERENTE";
+    public static final String ROLES_FUNCIONARIO = "ROLES_FUNCIONARIO";
+    public static final String ROLES_CLIENTE = "ROLES_CLIENTE";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
