@@ -1,9 +1,29 @@
 version: '3.3'
 
 services:
-  mysql:
-    container_name: my-base
+  server:
+    image: ordem-servico
+    ports:
+      - "5000:5000"
+    networks:
+      - springmysql-net
+    environment:
+      - spring.datasource.url=jdbc:mysql://my-base:3306/ordem_servico?useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
+      - spring.datasource.username=root
+      - spring.datasource.password=0510
+      - spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+      - spring.jpa.hibernate.naming-strategy=org.hibernate.cfg.ImproveNamingStrategy
+      - spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+      - spring.jpa.show-sql=true
+      - spring.jpa.hibernate.ddl-auto=update
+
+    depends_on:
+      - my-base
+
+  my-base:
     image: mysql:8
+    networks:
+      - springmysql-net
     ports:
       - 3306:3306
     volumes:
@@ -13,3 +33,7 @@ services:
       - MYSQL_PASSWORD=0510
       - MYSQL_USER=admin
       - MYSQL_DATABASE=ordem_servico
+
+
+networks:
+  springmysql-net:

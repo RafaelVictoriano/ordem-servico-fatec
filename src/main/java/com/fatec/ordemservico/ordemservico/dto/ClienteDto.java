@@ -8,7 +8,7 @@ import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-@Getter
+@Getter @Setter
 @AllArgsConstructor @NoArgsConstructor
 public class ClienteDto implements Serializable {
 
