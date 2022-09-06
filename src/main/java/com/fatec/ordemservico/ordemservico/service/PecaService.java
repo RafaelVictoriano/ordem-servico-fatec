@@ -24,8 +24,8 @@ public record PecaService(PecasRepository repository, PecasMapper mapper) {
     public void update(final Long id, final PecasDto pecasDto) {
         findById(id)
                 .ifPresentOrElse(peca -> {
-                    Pecas pecas = mapper.updatePecasFromPecasDto(pecasDto, peca);
-                    repository.save(peca);
+                    final var pecas = mapper.updatePecasFromPecasDto(pecasDto, peca);
+                    repository.save(pecas);
                 }, () -> {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Peca não econtrado");
                 });
