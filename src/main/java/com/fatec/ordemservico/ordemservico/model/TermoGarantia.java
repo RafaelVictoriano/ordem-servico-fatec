@@ -19,14 +19,10 @@ public class TermoGarantia {
     @Column(name = "tempo_garantia")
     private LocalDate tempoGarantia;
 
-    @ManyToOne
-    private Cliente cliente;
+    private String titulo;
 
-    @ManyToOne
-    private Servico servico;
-
-    @ManyToOne
-    private Usuario usuario;
+    @OneToOne(mappedBy = "termoGarantia")
+    private OrdemServico ordemServico;
 
 
 }

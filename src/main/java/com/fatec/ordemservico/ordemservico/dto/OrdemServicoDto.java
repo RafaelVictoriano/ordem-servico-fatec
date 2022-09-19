@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 public class OrdemServicoDto implements Serializable {
 
     private final String clienteId;
-    private final String servicoId;
+    private final String nome;
+    private final String tipoEquipamento;
     private final BigDecimal valorTotalPagar;
 }

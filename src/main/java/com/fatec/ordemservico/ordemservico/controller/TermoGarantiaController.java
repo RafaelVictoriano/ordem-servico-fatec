@@ -1,10 +1,7 @@
 package com.fatec.ordemservico.ordemservico.controller;
 
-import com.fatec.ordemservico.ordemservico.dto.PecasDto;
 import com.fatec.ordemservico.ordemservico.dto.TermoGarantiaDto;
-import com.fatec.ordemservico.ordemservico.model.Pecas;
 import com.fatec.ordemservico.ordemservico.model.TermoGarantia;
-import com.fatec.ordemservico.ordemservico.service.PecaService;
 import com.fatec.ordemservico.ordemservico.service.TermoGarantiaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
-import static com.fatec.ordemservico.ordemservico.model.Role.ROLES_FUNCIONARIO;
-import static com.fatec.ordemservico.ordemservico.model.Role.ROLES_GERENTE;
+import static com.fatec.ordemservico.ordemservico.model.Perfil.ROLES_FUNCIONARIO;
+import static com.fatec.ordemservico.ordemservico.model.Perfil.ROLES_GERENTE;
 
 @RequestMapping("/termo-garanria")
 @RestController

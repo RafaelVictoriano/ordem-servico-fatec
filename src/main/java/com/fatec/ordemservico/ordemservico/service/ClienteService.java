@@ -5,20 +5,29 @@ import com.fatec.ordemservico.ordemservico.dto.ClienteUpdateDTO;
 import com.fatec.ordemservico.ordemservico.mapper.ClienteMapper;
 import com.fatec.ordemservico.ordemservico.model.Cliente;
 import com.fatec.ordemservico.ordemservico.repository.ClienteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
 @Service
-public record ClienteService(ClienteRepository repository, ClienteMapper mapper) {
+public class ClienteService {
+    @Autowired
+    private ClienteRepository repository;
+    @Autowired
+    private ClienteMapper mapper;
+    @Autowired
+    private EnderecoService enderecoService;
 
-
+    @Transactional
     public void save(final ClienteDto clienteDto) {
+        enderecoService.save(clienteDto.getEndereco());
         final var cliente = mapper.clienteDtoToCliente(clienteDto);
         repository.save(cliente);
     }

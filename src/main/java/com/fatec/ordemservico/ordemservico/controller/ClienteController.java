@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
-import static com.fatec.ordemservico.ordemservico.model.Role.ROLES_FUNCIONARIO;
-import static com.fatec.ordemservico.ordemservico.model.Role.ROLES_GERENTE;
+import static com.fatec.ordemservico.ordemservico.model.Perfil.ROLES_FUNCIONARIO;
+import static com.fatec.ordemservico.ordemservico.model.Perfil.ROLES_GERENTE;
 
 @RequestMapping("/cliente")
 @RestController

@@ -8,13 +8,11 @@ import org.mapstruct.*;
 public interface OrdemServicoMapper {
 
     @Mappings({
-            @Mapping(target = "servico.id", source = "servicoId"),
             @Mapping(target = "cliente.id", source = "clienteId"),
     })
     OrdemServico ordemServicoDtoToOrdemServico(OrdemServicoDto ordemServicoDto);
 
     @Mappings({
-            @Mapping(target = "servicoId", source = "servico.id"),
             @Mapping(target = "clienteId", source = "cliente.id"),
     })
     OrdemServicoDto ordemServicoToOrdemServicoDto(OrdemServico ordemServico);

@@ -1,7 +1,6 @@
 package com.fatec.ordemservico.ordemservico.model;
 
-import lombok.Getter;
-import lombok.Setter;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,11 +8,9 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "usuarios")
-public class Usuario  implements UserDetails {
+public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,44 +20,97 @@ public class Usuario  implements UserDetails {
     private String cpf;
     private String nome;
     private Long telefone;
-    @ManyToMany
-    @JoinTable(name = "tb_user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private List<Role> roles;
+    @OneToOne
+    private Perfil perfil;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles;
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Long getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(Long telefone) {
+        this.telefone = telefone;
     }
 
     @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(perfil);
+    }
+
     public String getPassword() {
         return senha;
     }
 
     @Override
     public String getUsername() {
-        return nome;
+        return this.email;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return isEnabled();
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return isEnabled();
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return isEnabled();
     }
 
     @Override
     public boolean isEnabled() {
         return true;
     }
+
 }

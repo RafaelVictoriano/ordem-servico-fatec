@@ -35,8 +35,8 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente")
     private List<OrdemServico> ordemServico;
     
-    @OneToMany(mappedBy = "cliente")
-    private List<TermoGarantia> termoGarantia;
+    @OneToOne()
+    private Endereco endereco;
 
     public Cliente() {
     }

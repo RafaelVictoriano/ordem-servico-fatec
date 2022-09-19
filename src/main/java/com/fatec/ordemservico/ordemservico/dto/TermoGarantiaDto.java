@@ -8,7 +8,6 @@ import java.time.LocalDate;
 @Data
 public class TermoGarantiaDto implements Serializable {
 
+    private final String titulo;
     private final LocalDate tempoGarantia;
-    private final String clienteId;
-    private final String servicoId;
 }
