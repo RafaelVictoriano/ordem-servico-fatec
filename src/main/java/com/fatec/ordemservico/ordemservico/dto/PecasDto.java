@@ -1,15 +1,28 @@
 package com.fatec.ordemservico.ordemservico.dto;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sun.istack.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
+@Getter @Setter
 public class PecasDto implements Serializable {
-    private final String nome;
-    private final String fabricante;
-    private final String quantidade;
-    private final BigDecimal valor;
-    private final String fornecedor;
+
+    @NotEmpty
+    private String nome;
+    @NotEmpty
+    private String fabricante;
+    @NotNull
+    @Min(1)
+    private Integer quantidade;
+    @NotNull
+    private BigDecimal valor;
+    @NotEmpty
+    private String fornecedor;
 }

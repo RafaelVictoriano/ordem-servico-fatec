@@ -1,15 +1,25 @@
 package com.fatec.ordemservico.ordemservico.dto;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-@Data
+@Getter
+@Setter
 public class OrdemServicoDto implements Serializable {
 
-    private final String clienteId;
-    private final String nome;
-    private final String tipoEquipamento;
-    private final BigDecimal valorTotalPagar;
+    @NotEmpty
+    private String clienteId;
+    @NotBlank
+    private String nome;
+    @NotBlank
+    private String tipoEquipamento;
+    @NotNull
+    private BigDecimal valorTotalPagar;
 }

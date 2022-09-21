@@ -14,7 +14,9 @@ import java.util.List;
 
 import static com.fatec.ordemservico.ordemservico.model.Perfil.ROLES_FUNCIONARIO;
 import static com.fatec.ordemservico.ordemservico.model.Perfil.ROLES_GERENTE;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
+@CrossOrigin(allowedHeaders = "*", origins = "*", maxAge = 3600, methods = {POST, GET, PUT, OPTIONS})
 @RequestMapping("/pecas")
 @RestController
 public class PecasController {
