@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 @Setter
 public class OrdemServicoDto implements Serializable {
 
+    private Long id;
     @NotEmpty
     private String clienteId;
     @NotBlank

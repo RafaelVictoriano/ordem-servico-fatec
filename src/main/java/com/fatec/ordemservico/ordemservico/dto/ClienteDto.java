@@ -1,6 +1,5 @@
 package com.fatec.ordemservico.ordemservico.dto;
 
-import com.sun.istack.NotNull;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
@@ -8,6 +7,7 @@ import org.hibernate.validator.constraints.br.CPF;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -17,6 +17,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class ClienteDto implements Serializable {
 
+    private Long id;
     @NotNull
     @CPF()
     private String cpf;
