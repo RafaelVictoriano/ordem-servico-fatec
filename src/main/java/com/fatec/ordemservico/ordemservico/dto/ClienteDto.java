@@ -18,7 +18,7 @@ import java.time.LocalDate;
 public class ClienteDto implements Serializable {
 
     @NotNull
-    @CPF(message = "Cpf invalido")
+    @CPF()
     private String cpf;
     @NotNull
     private LocalDate dataNascimento;
@@ -31,7 +31,7 @@ public class ClienteDto implements Serializable {
     @Length(min = 9)
     private String telefone;
     @NotNull
-    @Email(message = "Email está com formato invalido")
+    @Email()
     private String email;
     @NotNull
     @Valid

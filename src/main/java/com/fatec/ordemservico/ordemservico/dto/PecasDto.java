@@ -1,20 +1,24 @@
 package com.fatec.ordemservico.ordemservico.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Getter @Setter
+@Getter
+@Setter
 public class PecasDto implements Serializable {
 
-    @NotEmpty
+    private Long id;
+
+    @NotBlank
     private String nome;
     @NotEmpty
     private String fabricante;

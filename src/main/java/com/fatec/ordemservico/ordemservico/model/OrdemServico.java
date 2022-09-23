@@ -21,11 +21,10 @@ public class OrdemServico {
 
     @Column(name = "tipo_equipamento")
     private String tipoEquipameto;
+
+    private String descricao;
     @ManyToOne
     private Cliente cliente;
-
-    @ManyToMany
-    private List<Pecas> pecas;
 
     @Column(name = "data_emissao")
     private LocalDate dateEmissao;

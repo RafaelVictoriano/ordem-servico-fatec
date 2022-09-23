@@ -10,7 +10,10 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "cliente")
+@Table(name = "cliente",
+indexes = {
+        @Index(name = "cpf_index", columnList = "cpf")
+})
 public class Cliente {
 
 

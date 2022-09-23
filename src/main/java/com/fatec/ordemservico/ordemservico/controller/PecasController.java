@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
+import javax.validation.Valid;
 import java.util.List;
 
 import static com.fatec.ordemservico.ordemservico.model.Perfil.ROLES_FUNCIONARIO;
@@ -27,7 +28,7 @@ public class PecasController {
     @ResponseStatus(HttpStatus.CREATED)
     @RolesAllowed({ROLES_FUNCIONARIO, ROLES_GERENTE})
     @PostMapping
-    public void save(@RequestBody @Validated PecasDto pecasDto) {
+    public void save(@RequestBody @Valid PecasDto pecasDto) {
         service.save(pecasDto);
     }
 

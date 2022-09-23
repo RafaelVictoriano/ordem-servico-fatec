@@ -18,7 +18,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 import static org.springframework.web.bind.annotation.RequestMethod.OPTIONS;
 
 @CrossOrigin(allowedHeaders = "*", origins = "*", maxAge = 3600, methods = {POST, GET, PUT, OPTIONS})
-@RequestMapping("/termo-garanria")
+@RequestMapping("/termo-garantia")
 @RestController
 public class TermoGarantiaController {
 

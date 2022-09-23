@@ -48,9 +48,13 @@ public class ClienteController {
     }
 
     @RolesAllowed({ROLES_FUNCIONARIO, ROLES_GERENTE})
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     @GetMapping("/{id}")
     public ResponseEntity<Cliente> findById(@PathVariable Long id) {
         return ResponseEntity.of(clienteService.findById(id));
+    }
+
+    @GetMapping("/{cpf}")
+    public ResponseEntity<Cliente> findByCPF(@PathVariable String cpf) {
+        return ResponseEntity.of(clienteService.findByCpf(cpf));
     }
 }

@@ -52,5 +52,9 @@ public class ClienteService {
     public Optional<Cliente> findById(Long id) {
         return repository.findById(id);
     }
+
+    public Optional<Cliente> findByCpf(String id) {
+        return repository.findByCpf(id);
+    }
 }
 
