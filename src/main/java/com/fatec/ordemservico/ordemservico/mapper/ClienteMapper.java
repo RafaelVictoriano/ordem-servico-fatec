@@ -14,7 +14,6 @@ public interface ClienteMapper {
     Cliente clienteDtoToCliente(ClienteDto clienteDto);
 
     @Mapping(target = "cliente.preferenciaPagamento", source = "dto.preferenciaPagamento")
-    @Mapping(target = "cliente.cep", source = "dto.cep")
     @Mapping(target = "cliente.telefone", source = "dto.telefone")
     @Mapping(target = "cliente.email", source = "dto.email")
     void clienteUpdateDtoToCliente(@MappingTarget Cliente cliente, ClienteUpdateDTO dto);
