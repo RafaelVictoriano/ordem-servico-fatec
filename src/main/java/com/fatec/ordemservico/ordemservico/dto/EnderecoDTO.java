@@ -30,5 +30,4 @@ public class EnderecoDTO implements Serializable {
     private String estado;
     private String complemento;
     private Integer numero;
-    private String clienteId;
 }

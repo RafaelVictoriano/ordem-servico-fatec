@@ -29,8 +29,6 @@ public class Cliente {
     @Column(name = "preferencia_pagamento")
     private String preferenciaPagamento;
 
-    private String cep;
-
     private String telefone;
 
     private String email;
@@ -38,7 +36,7 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente")
     private List<OrdemServico> ordemServico;
     
-    @OneToOne()
+    @OneToOne(mappedBy = "cliente")
     private Endereco endereco;
 
     public Cliente() {

@@ -14,6 +14,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.Objects.nonNull;
 import static java.util.stream.Collectors.toList;
 
 @Service
@@ -27,9 +28,9 @@ public class ClienteService {
 
     @Transactional
     public void save(final ClienteDto clienteDto) {
-        enderecoService.save(clienteDto.getEndereco());
         final var cliente = mapper.clienteDtoToCliente(clienteDto);
         repository.save(cliente);
+        enderecoService.save(clienteDto.getEndereco(), cliente);
     }
 
     public void update(final Long id, final ClienteUpdateDTO clienteUpdateDTO) {
@@ -37,16 +38,20 @@ public class ClienteService {
                 .ifPresentOrElse(cliente -> {
                     mapper.clienteUpdateDtoToCliente(cliente, clienteUpdateDTO);
                     repository.save(cliente);
+                    if (nonNull(clienteUpdateDTO.getEndereco())) {
+                        enderecoService.update(clienteUpdateDTO.getEndereco(), cliente.getEndereco());
+                    }
                 }, () -> {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não econtrado");
                 });
     }
 
-    public List<ClienteDto> get() {
+    public Optional<List<ClienteDto>> get() {
         final var clientes = repository.findAll();
-        return clientes.stream()
-                .map(mapper::clienteToClienteDto)
-                .collect(toList());
+        return Optional.of(clientes.stream()
+                        .map(mapper::clienteToClienteDto)
+                        .collect(toList()))
+                .filter(clienteDtos -> !clienteDtos.isEmpty());
     }
 
     public Optional<Cliente> findById(Long id) {

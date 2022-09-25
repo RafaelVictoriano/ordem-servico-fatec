@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class ClienteUpdateDTO {
 
     private String preferenciaPagamento;
-    private String cep;
     private String telefone;
     private String email;
+    private EnderecoDTO endereco;
 }

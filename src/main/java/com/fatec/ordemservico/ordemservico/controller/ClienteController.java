@@ -44,7 +44,7 @@ public class ClienteController {
     @RolesAllowed({ROLES_FUNCIONARIO, ROLES_GERENTE})
     @GetMapping
     public ResponseEntity<List<ClienteDto>> getAll() {
-        return ResponseEntity.ok(clienteService.get());
+        return ResponseEntity.of(clienteService.get());
     }
 
     @RolesAllowed({ROLES_FUNCIONARIO, ROLES_GERENTE})

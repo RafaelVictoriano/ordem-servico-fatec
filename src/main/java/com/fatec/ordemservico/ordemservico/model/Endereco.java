@@ -23,7 +23,7 @@ public class Endereco {
     private String complemento;
     private Integer numero;
 
-    @OneToOne(mappedBy = "endereco")
+    @OneToOne()
     private Cliente cliente;
 
 }
