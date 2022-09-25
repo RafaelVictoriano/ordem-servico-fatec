@@ -29,6 +29,7 @@ public class Handler {
 
     private final static String PREFIX_MESSAGE = "O campo %s %s";
 
+    @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(BindException.class)
     public ResponseEntity<List<ResponseErrorValidationDTO>> handlingException(BindException exception) {
         final var fieldsError = exception.getBindingResult().getFieldErrors();
