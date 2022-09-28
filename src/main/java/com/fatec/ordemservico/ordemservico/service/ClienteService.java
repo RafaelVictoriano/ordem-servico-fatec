@@ -26,7 +26,6 @@ public class ClienteService {
     @Autowired
     private EnderecoService enderecoService;
 
-    @Transactional
     public void save(final ClienteDto clienteDto) {
         final var cliente = mapper.clienteDtoToCliente(clienteDto);
         repository.save(cliente);

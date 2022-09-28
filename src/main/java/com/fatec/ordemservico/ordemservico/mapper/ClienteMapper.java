@@ -11,6 +11,8 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 @Mapper(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE, componentModel = "spring")
 public interface ClienteMapper {
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "endereco", ignore = true)
     Cliente clienteDtoToCliente(ClienteDto clienteDto);
 
     @Mapping(target = "cliente.preferenciaPagamento", source = "dto.preferenciaPagamento")

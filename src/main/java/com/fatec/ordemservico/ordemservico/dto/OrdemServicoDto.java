@@ -20,7 +20,7 @@ public class OrdemServicoDto implements Serializable {
     @NotBlank
     private String nome;
     @NotBlank
-    private String equipamento;
+    private String tipoEquipameto;
     @NotBlank
     private String descricao;
     @NotNull

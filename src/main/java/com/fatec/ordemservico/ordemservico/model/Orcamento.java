@@ -1,11 +1,14 @@
 package com.fatec.ordemservico.ordemservico.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
+
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -22,4 +25,13 @@ public class Orcamento {
     @Column(name = "valor_total")
     private BigDecimal valorTotal;
 
+    @ManyToMany()
+    @JoinTable(name = "orcamento_pecas",
+            joinColumns = @JoinColumn(name = "orcamento_id"),
+            inverseJoinColumns = @JoinColumn(name = "peca_id"))
+    private List<Pecas> pecas;
+
+    public Orcamento(OrdemServico ordemServico) {
+        this.ordemServico = ordemServico;
+    }
 }

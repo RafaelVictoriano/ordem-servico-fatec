@@ -14,11 +14,8 @@ import java.io.Serializable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @Setter
-public class EnderecoDTO implements Serializable {
+public class EnderecoDTO {
 
-    @NotNull
-    @Min(8)
-    @Max(8)
     private Integer cep;
     @NotBlank
     private String logradouro;

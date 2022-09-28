@@ -8,10 +8,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
 public record PecaService(PecasRepository repository, PecasMapper mapper) {
@@ -27,7 +30,7 @@ public record PecaService(PecasRepository repository, PecasMapper mapper) {
                     final var pecas = mapper.updatePecasFromPecasDto(pecasDto, peca);
                     repository.save(pecas);
                 }, () -> {
-                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Peca não econtrado");
+                    throw new ResponseStatusException(NOT_FOUND, "Peca não econtrado");
                 });
     }
 
@@ -40,5 +43,11 @@ public record PecaService(PecasRepository repository, PecasMapper mapper) {
 
     public Optional<Pecas> findById(Long id) {
         return repository.findById(id);
+    }
+
+    public List<Pecas> findByIdIn(List<Long> ids) {
+        return repository.findByIdIn(ids)
+                .filter(l -> !l.isEmpty())
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Peca não encontrada"));
     }
 }

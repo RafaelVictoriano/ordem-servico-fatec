@@ -24,9 +24,6 @@ public class Pecas implements Serializable {
     private BigDecimal valor;
     private String fornecedor;
 
-    @ManyToMany
-    @JoinTable(name = "orcamento_pecas",
-            joinColumns = @JoinColumn(name = "orcamento_id"),
-            inverseJoinColumns = @JoinColumn(name = "peca_id"))
-    private List<Orcamento> orcamento;
+    @ManyToMany(mappedBy = "pecas")
+    private List<Orcamento> orcamentos;
 }

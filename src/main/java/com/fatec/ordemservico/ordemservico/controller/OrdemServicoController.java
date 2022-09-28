@@ -50,6 +50,6 @@ public class OrdemServicoController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @GetMapping("/{id}")
     public ResponseEntity<OrdemServico> findById(@PathVariable Long id) {
-        return ResponseEntity.of(service.findById(id));
+        return ResponseEntity.ok(service.findById(id));
     }
 }

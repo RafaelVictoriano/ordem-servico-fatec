@@ -26,14 +26,12 @@ public class ClienteDto implements Serializable {
     @NotNull
     private String preferenciaPagamento;
     @NotNull
-    @Length(min = 8, max = 8)
-    private String cep;
-    @NotNull
     @Length(min = 9)
     private String telefone;
     @NotNull
     @Email()
     private String email;
+
     @NotNull
     @Valid
     private EnderecoDTO endereco;

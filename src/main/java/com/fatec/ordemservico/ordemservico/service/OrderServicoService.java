@@ -23,11 +23,8 @@ public record OrderServicoService(OrdemServicoRepository repository, OrdemServic
     }
 
     public void update(final Long id, final OrdemServicoDto ordemServicoDto) {
-        findById(id)
-                .ifPresentOrElse(os -> repository.save(mapper.updateOrdemServicoFromOrdemServicoDto(ordemServicoDto, os))
-                        , () -> {
-                            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ordem de serviço não econtrado");
-                        });
+        final var ordermServico = findById(id);
+        repository.save(mapper.updateOrdemServicoFromOrdemServicoDto(ordemServicoDto, ordermServico));
     }
 
     public Optional<List<OrdemServicoDto>> get() {
@@ -37,7 +34,8 @@ public record OrderServicoService(OrdemServicoRepository repository, OrdemServic
                 .collect(toList()));
     }
 
-    public Optional<OrdemServico> findById(Long id) {
-        return repository.findById(id);
+    public OrdemServico findById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ordem de Servico não encontrada"));
     }
 }
