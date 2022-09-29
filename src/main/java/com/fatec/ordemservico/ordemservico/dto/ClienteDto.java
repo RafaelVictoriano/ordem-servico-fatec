@@ -18,6 +18,9 @@ import java.time.LocalDate;
 public class ClienteDto implements Serializable {
 
     private Long id;
+
+    private String nome;
+
     @NotNull
     @CPF()
     private String cpf;
