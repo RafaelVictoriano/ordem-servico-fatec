@@ -57,8 +57,9 @@ public class ClienteService {
         return repository.findById(id);
     }
 
-    public Optional<Cliente> findByCpf(String id) {
-        return repository.findByCpf(id);
+    public Optional<ClienteDto> findByCpf(String id) {
+        return repository.findByCpf(id)
+                .map(mapper::clienteToClienteDto);
     }
 }
 
