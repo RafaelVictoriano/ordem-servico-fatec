@@ -8,6 +8,7 @@ import com.fatec.ordemservico.ordemservico.repository.OrcamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -21,14 +22,15 @@ public class OrcamentoService {
     @Autowired
     private OrcamentoRepository repository;
 
+    @Transactional
     public Orcamento generate(OrcamentoDto orcamentoDto) {
         final var ordemServico = ordemServicoService.findById(orcamentoDto.getOrdemServicoId());
         final var pecas = pecaService.findByIdIn(orcamentoDto.getPecaIds());
-        final var orcamento = new Orcamento(ordemServico);
+        final var orcamento = new Orcamento();
         orcamento.setPecas(pecas);
+        orcamento.setOrdemServico(ordemServico);
         orcamento.setValorTotal(getTotalValue(pecas, ordemServico));
-        repository.save(orcamento);
-        return orcamento;
+        return repository.save(orcamento);
     }
 
     private BigDecimal getTotalValue(List<Pecas> pecas, OrdemServico ordemServico) {

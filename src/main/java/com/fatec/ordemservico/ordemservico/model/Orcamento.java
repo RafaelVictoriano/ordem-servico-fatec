@@ -31,7 +31,4 @@ public class Orcamento {
             inverseJoinColumns = @JoinColumn(name = "peca_id"))
     private List<Pecas> pecas;
 
-    public Orcamento(OrdemServico ordemServico) {
-        this.ordemServico = ordemServico;
-    }
 }

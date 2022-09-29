@@ -34,6 +34,9 @@ public class OrdemServico {
 
     private BigDecimal valor;
 
+    @OneToOne(mappedBy = "ordemServico")
+    private Orcamento orcamento;
+
     @PrePersist
     private void prePersisit() {
         dateEmissao = LocalDate.now();
