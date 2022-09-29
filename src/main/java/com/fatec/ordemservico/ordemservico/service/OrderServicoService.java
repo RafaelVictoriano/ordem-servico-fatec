@@ -1,10 +1,8 @@
 package com.fatec.ordemservico.ordemservico.service;
 
 import com.fatec.ordemservico.ordemservico.dto.OrdemServicoDto;
-import com.fatec.ordemservico.ordemservico.dto.PecasDto;
 import com.fatec.ordemservico.ordemservico.mapper.OrdemServicoMapper;
 import com.fatec.ordemservico.ordemservico.model.OrdemServico;
-import com.fatec.ordemservico.ordemservico.model.Pecas;
 import com.fatec.ordemservico.ordemservico.repository.OrdemServicoRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -32,6 +30,11 @@ public record OrderServicoService(OrdemServicoRepository repository, OrdemServic
         return Optional.of(pecas.stream()
                 .map(mapper::ordemServicoToOrdemServicoDto)
                 .collect(toList()));
+    }
+
+    public OrdemServicoDto getById(final Long id) {
+        final var ordemServico = findById(id);
+        return mapper.ordemServicoToOrdemServicoDto(ordemServico);
     }
 
     public OrdemServico findById(Long id) {

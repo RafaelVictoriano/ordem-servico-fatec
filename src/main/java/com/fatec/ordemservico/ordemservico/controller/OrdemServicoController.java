@@ -49,7 +49,7 @@ public class OrdemServicoController {
     @RolesAllowed({ROLES_FUNCIONARIO, ROLES_GERENTE})
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @GetMapping("/{id}")
-    public ResponseEntity<OrdemServico> findById(@PathVariable Long id) {
-        return ResponseEntity.ok(service.findById(id));
+    public ResponseEntity<OrdemServicoDto> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getById(id));
     }
 }
