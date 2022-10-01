@@ -9,6 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,4 +26,6 @@ public class OrdemServicoDto implements Serializable {
     private String descricao;
     @NotNull
     private BigDecimal valor;
+
+    private List<Long> servicosId;
 }

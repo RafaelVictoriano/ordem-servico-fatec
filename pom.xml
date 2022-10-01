@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.fatec.ordem-servico</groupId>
 	<artifactId>ordem-servico</artifactId>
-	<version>0.0.6-SNAPSHOT</version>
+	<version>0.0.7-SNAPSHOT</version>
 	<name>ordem-servico</name>
 	<description>Trabalho fatec</description>
 	<properties>

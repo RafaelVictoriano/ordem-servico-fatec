@@ -4,6 +4,7 @@ import com.fatec.ordemservico.ordemservico.dto.OrcamentoDto;
 import com.fatec.ordemservico.ordemservico.model.Orcamento;
 import com.fatec.ordemservico.ordemservico.model.OrdemServico;
 import com.fatec.ordemservico.ordemservico.model.Pecas;
+import com.fatec.ordemservico.ordemservico.model.Servico;
 import com.fatec.ordemservico.ordemservico.repository.OrcamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class OrcamentoService {
     private OrcamentoRepository repository;
 
     @Transactional
-    public Orcamento generate(OrcamentoDto orcamentoDto) {
+    public Orcamento generate(final OrcamentoDto orcamentoDto) {
         final var ordemServico = ordemServicoService.findById(orcamentoDto.getOrdemServicoId());
         final var pecas = pecaService.findByIdIn(orcamentoDto.getPecaIds());
         final var orcamento = new Orcamento();
@@ -34,9 +35,17 @@ public class OrcamentoService {
     }
 
     private BigDecimal getTotalValue(List<Pecas> pecas, OrdemServico ordemServico) {
-        final var totalValuePecas = pecas.stream()
-                .mapToDouble(p -> p.getValor().doubleValue())
-                .sum();
-        return ordemServico.getValor().add(BigDecimal.valueOf(totalValuePecas));
+        final var totalValuePecas = getSum(pecas.stream().map(Pecas::getValor).toList());
+        final var servicosValues = getSum(ordemServico.getServicos().stream()
+                .map(Servico::getValor)
+                .toList());
+
+        return totalValuePecas.add(servicosValues);
+    }
+
+    private BigDecimal getSum(List<BigDecimal> number) {
+        return BigDecimal.valueOf(number.stream()
+                .mapToDouble(BigDecimal::doubleValue)
+                .sum());
     }
 }

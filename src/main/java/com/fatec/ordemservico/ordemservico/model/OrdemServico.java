@@ -32,10 +32,14 @@ public class OrdemServico {
     @OneToOne
     private TermoGarantia termoGarantia;
 
-    private BigDecimal valor;
-
     @OneToOne(mappedBy = "ordemServico")
     private Orcamento orcamento;
+
+    @ManyToMany()
+    @JoinTable(name = "servico_os",
+            joinColumns = @JoinColumn(name = "os_id"),
+            inverseJoinColumns = @JoinColumn(name = "servico_id"))
+    private List<Servico> servicos;
 
     @PrePersist
     private void prePersisit() {
