@@ -1,6 +1,7 @@
 package com.fatec.ordemservico.ordemservico.controller;
 
 import com.fatec.ordemservico.ordemservico.dto.OrdemServicoDto;
+import com.fatec.ordemservico.ordemservico.dto.OrdemServicoResponseDTO;
 import com.fatec.ordemservico.ordemservico.model.OrdemServico;
 import com.fatec.ordemservico.ordemservico.service.OrderServicoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,14 +43,14 @@ public class OrdemServicoController {
 
     @RolesAllowed({ROLES_FUNCIONARIO, ROLES_GERENTE})
     @GetMapping
-    public ResponseEntity<List<OrdemServicoDto>> getAll() {
+    public ResponseEntity<List<OrdemServicoResponseDTO>> getAll() {
         return ResponseEntity.of(service.get());
     }
 
     @RolesAllowed({ROLES_FUNCIONARIO, ROLES_GERENTE})
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @GetMapping("/{id}")
-    public ResponseEntity<OrdemServicoDto> findById(@PathVariable Long id) {
+    public ResponseEntity<OrdemServicoResponseDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok(service.getById(id));
     }
 }

@@ -1,6 +1,7 @@
 package com.fatec.ordemservico.ordemservico.mapper;
 
 import com.fatec.ordemservico.ordemservico.dto.OrdemServicoDto;
+import com.fatec.ordemservico.ordemservico.dto.OrdemServicoResponseDTO;
 import com.fatec.ordemservico.ordemservico.model.OrdemServico;
 import com.fatec.ordemservico.ordemservico.model.Servico;
 import org.aspectj.lang.annotation.After;
@@ -16,10 +17,8 @@ public interface OrdemServicoMapper {
     })
     OrdemServico ordemServicoDtoToOrdemServico(OrdemServicoDto ordemServicoDto);
 
-    @Mappings({
-            @Mapping(target = "clienteId", source = "cliente.id"),
-    })
-    OrdemServicoDto ordemServicoToOrdemServicoDto(OrdemServico ordemServico);
+
+    OrdemServicoResponseDTO ordemServicoToOrdemServicoDto(OrdemServico ordemServico);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     OrdemServico updateOrdemServicoFromOrdemServicoDto(OrdemServicoDto ordemServicoDto, @MappingTarget OrdemServico ordemServico);

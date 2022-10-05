@@ -1,6 +1,7 @@
 package com.fatec.ordemservico.ordemservico.service;
 
 import com.fatec.ordemservico.ordemservico.dto.OrdemServicoDto;
+import com.fatec.ordemservico.ordemservico.dto.OrdemServicoResponseDTO;
 import com.fatec.ordemservico.ordemservico.mapper.OrdemServicoMapper;
 import com.fatec.ordemservico.ordemservico.model.OrdemServico;
 import com.fatec.ordemservico.ordemservico.repository.OrdemServicoRepository;
@@ -25,14 +26,14 @@ public record OrderServicoService(OrdemServicoRepository repository, OrdemServic
         repository.save(mapper.updateOrdemServicoFromOrdemServicoDto(ordemServicoDto, ordermServico));
     }
 
-    public Optional<List<OrdemServicoDto>> get() {
+    public Optional<List<OrdemServicoResponseDTO>> get() {
         final var pecas = repository.findAll();
         return Optional.of(pecas.stream()
                 .map(mapper::ordemServicoToOrdemServicoDto)
                 .collect(toList()));
     }
 
-    public OrdemServicoDto getById(final Long id) {
+    public OrdemServicoResponseDTO getById(final Long id) {
         final var ordemServico = findById(id);
         return mapper.ordemServicoToOrdemServicoDto(ordemServico);
     }
