@@ -19,8 +19,6 @@ public class OrdemServicoDto implements Serializable {
     @NotEmpty
     private String clienteId;
     @NotBlank
-    private String nome;
-    @NotBlank
     private String tipoEquipameto;
     @NotBlank
     private String descricao;
