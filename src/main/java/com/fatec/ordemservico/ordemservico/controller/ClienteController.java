@@ -49,8 +49,8 @@ public class ClienteController {
 
     @RolesAllowed({ROLES_FUNCIONARIO, ROLES_GERENTE})
     @GetMapping("/{id}")
-    public ResponseEntity<Cliente> findById(@PathVariable Long id) {
-        return ResponseEntity.of(clienteService.findById(id));
+    public ResponseEntity<ClienteDto> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(clienteService.getById(id));
     }
 
     @GetMapping("/cpf/{cpf}")

@@ -53,6 +53,9 @@ public class ClienteService {
                 .filter(clienteDtos -> !clienteDtos.isEmpty());
     }
 
+    public ClienteDto getById(Long id) {
+        return mapper.clienteToClienteDto(findById(id).orElseThrow());
+    }
     public Optional<Cliente> findById(Long id) {
         return repository.findById(id);
     }
