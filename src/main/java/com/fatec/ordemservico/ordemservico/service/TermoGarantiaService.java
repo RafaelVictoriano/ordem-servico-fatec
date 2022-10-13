@@ -1,5 +1,6 @@
 package com.fatec.ordemservico.ordemservico.service;
 
+import com.fatec.ordemservico.ordemservico.dto.OrdemServicoDto;
 import com.fatec.ordemservico.ordemservico.dto.TermoGarantiaDto;
 import com.fatec.ordemservico.ordemservico.mapper.TermoGarantiraMapper;
 import com.fatec.ordemservico.ordemservico.model.TermoGarantia;
@@ -12,11 +13,16 @@ import java.util.Optional;
 import static java.util.stream.Collectors.toList;
 
 @Service
-public record TermoGarantiaService(TermoGarantiraMapper mapper, TermoGarantiaRepository repository) {
+public record TermoGarantiaService(TermoGarantiraMapper mapper,
+                                   TermoGarantiaRepository repository,
+                                   OrderServicoService orderServicoService) {
 
     public void save(final TermoGarantiaDto termoGarantiaDto) {
         final var termoGarantia = mapper.dtoToEntity(termoGarantiaDto);
         repository.save(termoGarantia);
+        OrdemServicoDto ordemServicoDto = new OrdemServicoDto();
+        ordemServicoDto.setTermoGarantiaId(termoGarantia.getId());
+        orderServicoService.update(termoGarantiaDto.getOrdemServicoId(), ordemServicoDto);
     }
 
     public List<TermoGarantiaDto> get() {

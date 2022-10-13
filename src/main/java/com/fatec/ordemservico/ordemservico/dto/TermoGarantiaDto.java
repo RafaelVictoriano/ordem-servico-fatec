@@ -19,6 +19,10 @@ public class TermoGarantiaDto implements Serializable {
 
     @NotBlank
     private String titulo;
+
     @NotNull
     private LocalDate tempoGarantia;
+
+    @NotNull
+    private Long ordemServicoId;
 }

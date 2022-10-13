@@ -1,6 +1,5 @@
 package com.fatec.ordemservico.ordemservico.dto;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,4 +25,6 @@ public class OrdemServicoDto implements Serializable {
     private BigDecimal valor;
 
     private List<Long> servicosId;
+
+    private Long termoGarantiaId;
 }

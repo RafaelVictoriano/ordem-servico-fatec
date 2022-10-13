@@ -9,6 +9,8 @@ import org.mapstruct.*;
 
 import java.util.List;
 
+import static java.util.Objects.nonNull;
+
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface OrdemServicoMapper {
 
@@ -21,20 +23,23 @@ public interface OrdemServicoMapper {
     OrdemServicoResponseDTO ordemServicoToOrdemServicoDto(OrdemServico ordemServico);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "termoGarantia.id", source = "termoGarantiaId")
     OrdemServico updateOrdemServicoFromOrdemServicoDto(OrdemServicoDto ordemServicoDto, @MappingTarget OrdemServico ordemServico);
 
 
     @AfterMapping
     default void afterOrdemServicoDtoToOrdemServico(@MappingTarget OrdemServico ordemServico,
                                                     OrdemServicoDto ordemServicoDto) {
-      final var servicos = ordemServicoDto
-                .getServicosId()
-                .stream()
-                .map(id -> {
-                    final var servico = new Servico();
-                    servico.setId(id);
-                    return servico;
-                }).toList();
-      ordemServico.setServicos(servicos);
+        if (nonNull(ordemServicoDto.getServicosId())) {
+            final var servicos = ordemServicoDto
+                    .getServicosId()
+                    .stream()
+                    .map(id -> {
+                        final var servico = new Servico();
+                        servico.setId(id);
+                        return servico;
+                    }).toList();
+            ordemServico.setServicos(servicos);
+        }
     }
 }
