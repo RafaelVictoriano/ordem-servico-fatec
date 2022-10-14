@@ -26,7 +26,7 @@ public class OrcamentoService {
     @Transactional
     public Orcamento generate(final OrcamentoDto orcamentoDto) {
         final var ordemServico = ordemServicoService.findById(orcamentoDto.getOrdemServicoId());
-        final var pecas = pecaService.findByIdIn(orcamentoDto.getPecaIds());
+        final var pecas = pecaService.findByIdInAndUpdateQuantity(orcamentoDto.getPecaIds());
         final var orcamento = new Orcamento();
         orcamento.setPecas(pecas);
         orcamento.setOrdemServico(ordemServico);

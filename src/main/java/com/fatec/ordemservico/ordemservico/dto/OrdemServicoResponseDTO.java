@@ -16,7 +16,7 @@ public class OrdemServicoResponseDTO implements Serializable {
     private String descricao;
     private ClienteDto cliente;
     private LocalDate dateEmissao;
-    private TermoGarantiaDto termoGarantia;
+    private TermoGarantiaResponseDto termoGarantia;
     private OrcamentoResponseDto orcamento;
     private List<ServicoDto> servicos;
 }

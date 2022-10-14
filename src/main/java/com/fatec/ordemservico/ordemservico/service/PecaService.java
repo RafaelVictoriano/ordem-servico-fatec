@@ -45,9 +45,14 @@ public record PecaService(PecasRepository repository, PecasMapper mapper) {
         return repository.findById(id);
     }
 
-    public List<Pecas> findByIdIn(List<Long> ids) {
-        return repository.findByIdIn(ids)
+    public List<Pecas> findByIdInAndUpdateQuantity(List<Long> ids) {
+        final var pecas = repository.findByIdIn(ids)
                 .filter(l -> !l.isEmpty())
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Peca não encontrada"));
+
+        pecas.forEach(p -> p.setQuantidade(p.getQuantidade()));
+        repository.saveAll(pecas);
+        return pecas;
     }
+
 }
