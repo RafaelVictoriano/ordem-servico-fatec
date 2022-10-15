@@ -8,11 +8,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.util.function.Predicate.not;
 import static java.util.stream.Collectors.toList;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
@@ -46,11 +50,16 @@ public record PecaService(PecasRepository repository, PecasMapper mapper) {
     }
 
     public List<Pecas> findByIdInAndUpdateQuantity(List<Long> ids) {
-        final var pecas = repository.findByIdIn(ids)
-                .filter(l -> !l.isEmpty())
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Peca não encontrada"));
+        final var pecas = Optional.of(repository.findByIdIn(ids)
+                        .stream()
+                        .flatMap(Collection::stream)
+                        .filter(p -> p.getQuantidade() > 0)
+                        .toList())
+                .filter(not(List::isEmpty))
+                .orElseThrow(() ->
+                        new ResponseStatusException(NOT_FOUND, "Nâo foi encontrada a peça com quantidade dispónivel"));
 
-        pecas.forEach(p -> p.setQuantidade(p.getQuantidade()));
+        pecas.forEach(p -> p.setQuantidade(p.getQuantidade() - 1));
         repository.saveAll(pecas);
         return pecas;
     }

@@ -7,11 +7,16 @@ import com.fatec.ordemservico.ordemservico.model.Pecas;
 import com.fatec.ordemservico.ordemservico.model.Servico;
 import com.fatec.ordemservico.ordemservico.repository.OrcamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
+
+import static java.util.Optional.of;
 
 @Service
 public class OrcamentoService {
@@ -26,6 +31,13 @@ public class OrcamentoService {
     @Transactional
     public Orcamento generate(final OrcamentoDto orcamentoDto) {
         final var ordemServico = ordemServicoService.findById(orcamentoDto.getOrdemServicoId());
+
+        of(ordemServico.getServicos())
+                .filter(List::isEmpty)
+                .ifPresent((l) -> {
+                    throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "O orçamento não pode sem ter um serviço relacionado a OS");
+                });
+
         final var pecas = pecaService.findByIdInAndUpdateQuantity(orcamentoDto.getPecaIds());
         final var orcamento = new Orcamento();
         orcamento.setPecas(pecas);

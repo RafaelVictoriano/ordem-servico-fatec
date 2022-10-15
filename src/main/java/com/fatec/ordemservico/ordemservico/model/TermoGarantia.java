@@ -21,6 +21,7 @@ public class TermoGarantia {
 
     private String titulo;
 
+    @JoinColumn(unique = true)
     @OneToOne(mappedBy = "termoGarantia")
     private OrdemServico ordemServico;
 

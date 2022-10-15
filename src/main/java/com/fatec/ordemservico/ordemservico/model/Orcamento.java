@@ -1,6 +1,9 @@
 package com.fatec.ordemservico.ordemservico.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -19,7 +22,8 @@ public class Orcamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @JoinColumn(unique = true)
+    @OneToOne()
     private OrdemServico ordemServico;
 
     @Column(name = "valor_total")
