@@ -21,10 +21,8 @@ public class OrdemServicoDto implements Serializable {
     private String tipoEquipameto;
     @NotBlank
     private String descricao;
-    @NotNull
-    private BigDecimal valor;
 
     private List<Long> servicosId;
 
-    private Long termoGarantiaId;
+    private TermoGarantiaDto termoGarantia;
 }

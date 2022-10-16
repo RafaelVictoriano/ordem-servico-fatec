@@ -4,9 +4,12 @@ import com.fatec.ordemservico.ordemservico.dto.OrdemServicoDto;
 import com.fatec.ordemservico.ordemservico.dto.OrdemServicoResponseDTO;
 import com.fatec.ordemservico.ordemservico.mapper.OrdemServicoMapper;
 import com.fatec.ordemservico.ordemservico.model.OrdemServico;
+import com.fatec.ordemservico.ordemservico.model.TermoGarantia;
 import com.fatec.ordemservico.ordemservico.repository.OrdemServicoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -15,10 +18,20 @@ import java.util.Optional;
 import static java.util.stream.Collectors.toList;
 
 @Service
-public record OrderServicoService(OrdemServicoRepository repository, OrdemServicoMapper mapper) {
+public class OrderServicoService {
+    @Autowired
+    private OrdemServicoRepository repository;
+    @Autowired
+    private OrdemServicoMapper mapper;
+    @Autowired
+    private TermoGarantiaService termoGarantiaService;
 
+    @Transactional
     public void save(final OrdemServicoDto ordemServicoDto) {
-        repository.save(mapper.ordemServicoDtoToOrdemServico(ordemServicoDto));
+        final var termoGarantia = termoGarantiaService.save(ordemServicoDto.getTermoGarantia());
+        final var ordemServico = mapper.ordemServicoDtoToOrdemServico(ordemServicoDto);
+        ordemServico.setTermoGarantia(termoGarantia);
+        repository.save(ordemServico);
     }
 
     public void update(final Long id, final OrdemServicoDto ordemServicoDto) {

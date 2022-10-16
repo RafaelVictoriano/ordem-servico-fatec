@@ -1,14 +1,16 @@
 package com.fatec.ordemservico.ordemservico.service;
 
-import com.fatec.ordemservico.ordemservico.dto.OrdemServicoDto;
 import com.fatec.ordemservico.ordemservico.dto.TermoGarantiaDto;
+import com.fatec.ordemservico.ordemservico.dto.TermoGarantiaResponseDto;
 import com.fatec.ordemservico.ordemservico.mapper.TermoGarantiraMapper;
+import com.fatec.ordemservico.ordemservico.model.OrdemServico;
 import com.fatec.ordemservico.ordemservico.model.TermoGarantia;
 import com.fatec.ordemservico.ordemservico.repository.TermoGarantiaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,27 +22,23 @@ public class TermoGarantiaService {
     private TermoGarantiraMapper mapper;
     @Autowired
     private TermoGarantiaRepository repository;
-    @Autowired
-    private OrderServicoService orderServicoService;
 
-    @Transactional
-    public void save(final TermoGarantiaDto termoGarantiaDto) {
+    public TermoGarantia save(final TermoGarantiaDto termoGarantiaDto) {
         final var termoGarantia = mapper.dtoToEntity(termoGarantiaDto);
-        repository.save(termoGarantia);
-        OrdemServicoDto ordemServicoDto = new OrdemServicoDto();
-        ordemServicoDto.setTermoGarantiaId(termoGarantia.getId());
-        orderServicoService.update(termoGarantiaDto.getOrdemServicoId(), ordemServicoDto);
+        return repository.save(termoGarantia);
     }
 
-    public List<TermoGarantiaDto> get() {
+    public List<TermoGarantiaResponseDto> get() {
         final var pecas = repository.findAll();
         return pecas.stream()
                 .map(mapper::entityToDto)
                 .collect(toList());
     }
 
-    public Optional<TermoGarantia> findById(Long id) {
-        return repository.findById(id);
+    public TermoGarantiaResponseDto findById(Long id) {
+        return mapper.entityToDto(repository.findById(id)
+                .orElseThrow(() ->
+                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Termo de garantia não encontrado")));
     }
 
 
