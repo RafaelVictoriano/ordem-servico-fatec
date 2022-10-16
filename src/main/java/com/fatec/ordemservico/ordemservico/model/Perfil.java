@@ -4,6 +4,7 @@ import com.fatec.ordemservico.ordemservico.enumerations.RoleName;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Perfil implements GrantedAuthority {
@@ -16,8 +17,8 @@ public class Perfil implements GrantedAuthority {
     @Enumerated(EnumType.STRING)
     private RoleName nome;
 
-    @OneToOne(mappedBy = "perfil")
-    private Usuario usuario;
+    @OneToMany(mappedBy = "perfil")
+    private List<Usuario> usuario;
 
     public Perfil() {
     }

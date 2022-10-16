@@ -20,7 +20,7 @@ public class Usuario implements UserDetails {
     private String cpf;
     private String nome;
     private Long telefone;
-    @OneToOne
+    @ManyToOne
     private Perfil perfil;
 
     public Perfil getPerfil() {

@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
+import javax.validation.Valid;
 import javax.xml.bind.ValidationException;
 import java.util.Set;
 
@@ -26,7 +27,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     @RolesAllowed(ROLES_GERENTE)
     @PostMapping()
-    public UserResponseDTO register(@RequestBody UserDto request) throws ValidationException {
+    public UserResponseDTO register(@RequestBody @Valid UserDto request) throws ValidationException {
         return userDetailsServiceImpl.create(request);
     }
 
