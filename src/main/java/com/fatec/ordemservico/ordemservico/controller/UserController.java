@@ -26,7 +26,6 @@ public class UserController {
     @Autowired private UserDetailsServiceImpl userDetailsServiceImpl;
 
 
-
     @RolesAllowed(ROLES_GERENTE)
     @PostMapping()
     public UserResponseDTO register(@RequestBody UserDto request) throws ValidationException {
