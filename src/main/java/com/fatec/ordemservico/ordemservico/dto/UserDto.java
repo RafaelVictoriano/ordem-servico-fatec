@@ -1,7 +1,7 @@
 package com.fatec.ordemservico.ordemservico.dto;
 
-import com.br.login.enumearation.RoleName;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fatec.ordemservico.ordemservico.enumerations.RoleName;
 import com.sun.istack.NotNull;
 
 import java.io.Serializable;

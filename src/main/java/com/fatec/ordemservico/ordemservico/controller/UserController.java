@@ -5,12 +5,8 @@ import com.fatec.ordemservico.ordemservico.dto.UserDto;
 import com.fatec.ordemservico.ordemservico.dto.UserResponseDTO;
 import com.fatec.ordemservico.ordemservico.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.xml.bind.ValidationException;
@@ -23,9 +19,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RestController
 @RequestMapping("/usuario")
 public class UserController {
-    @Autowired private UserDetailsServiceImpl userDetailsServiceImpl;
+    @Autowired
+    private UserDetailsServiceImpl userDetailsServiceImpl;
 
 
+    @ResponseStatus(HttpStatus.CREATED)
     @RolesAllowed(ROLES_GERENTE)
     @PostMapping()
     public UserResponseDTO register(@RequestBody UserDto request) throws ValidationException {

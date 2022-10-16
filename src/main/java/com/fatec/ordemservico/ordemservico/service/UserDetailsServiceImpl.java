@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,10 +26,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UsuarioRepository repository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @Autowired
     private UsuarioMapper mapper;
 
@@ -52,7 +49,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
 
         final var usuario = this.mapper.create(userDto);
-        usuario.setSenha(passwordEncoder.encode(userDto.getSenha()));
+        usuario.setSenha(new BCryptPasswordEncoder().encode(userDto.getSenha()));
         repository.save(usuario);
         return this.mapper.userToUserResponseDTO(usuario);
     }
