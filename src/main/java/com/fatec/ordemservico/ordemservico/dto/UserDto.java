@@ -3,17 +3,23 @@ package com.fatec.ordemservico.ordemservico.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fatec.ordemservico.ordemservico.enumerations.RoleName;
 import com.sun.istack.NotNull;
+import org.hibernate.validator.constraints.br.CPF;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDto implements Serializable {
-    @NotNull
+    @NotNull @Email @NotEmpty
     private String email;
+    @NotEmpty
     private String nome;
+    @NotEmpty
     private String senha;
+    @NotEmpty
     private String reSenha;
-    @NotNull
+    @NotNull @CPF
     private String cpf;
     @NotNull
     private Long telefone;
